@@ -1,5 +1,3 @@
-
-
 const API_KEY = '8ee10547e25804fc1a743e6061ff1c84';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
@@ -9,6 +7,8 @@ const locationElement = document.getElementById('location');
 const temperatureElement = document.getElementById('temperature');
 const descriptionElement = document.getElementById('description');
 const humidityElement = document.getElementById('humidity');
+const highElement = document.getElementById('high');
+const lowElement = document.getElementById('low');
 
 searchButton.addEventListener('click', () => {
     const city = searchInput.value;
@@ -23,6 +23,8 @@ function getWeatherData(city) {
             temperatureElement.innerHTML = `${convertKelvinToFahrenheit(data.main.temp)}°F <i class="wi ${iconMap[data.weather[0].icon]}"></i>`;
             descriptionElement.textContent = data.weather[0].description;
             humidityElement.textContent = `Humidity: ${data.main.humidity}%`;
+            highElement.textContent = convertKelvinToFahrenheit(data.main.temp_max);
+            lowElement.textContent = convertKelvinToFahrenheit(data.main.temp_min);
         })
         .catch(error => {
             console.error(error);
@@ -53,3 +55,4 @@ const iconMap = {
   '13n': 'wi-night-alt-snow',
   '50n': 'wi-night-fog',
 };
+
